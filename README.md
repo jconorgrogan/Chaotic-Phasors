@@ -1,5 +1,4 @@
 # Chaotic-Phasors
-Attempt at Quantum-Proof Encryption utilizing Chaos systems
 
 Utilizing a unique phasor system to create "signitures" (sum of phasors at any given T, right side) that can be easily verified given private-key starting conditions (phasors, left side), which can collide "cross-fire" stlye. Can perfectly re-run in microseconds, would take many universes to brute force. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
 
@@ -12,7 +11,7 @@ HTML/Java
 
 # Complexity Estimation of Brute-Forcing a Private Key
 
-## Assumptions
+## Example (from code- could also trivially increase complexity)
 
 1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors.
 2. **Precision**: Each phasor has a position and an angle, both to 16 decimal places.
