@@ -147,24 +147,23 @@
     }
 
     function animate(currentTime) {
-        const canvas1 = document.getElementById('canvas1');
-        const ctx1 = canvas1.getContext('2d');
-        const canvas2 = document.getElementById('canvas2');
-        const ctx2 = canvas2.getContext('2d');
+    const canvas1 = document.getElementById('canvas1');
+    const ctx1 = canvas1.getContext('2d');
+    const canvas2 = document.getElementById('canvas2');
+    const ctx2 = canvas2.getContext('2d');
 
-        let deltaTime = 1;
-        if (lastTime) {
-            deltaTime = (currentTime - lastTime) / 1000.0;
-        }
-        lastTime = currentTime;
-
-        if (frame < totalFrames) {
-            plotSystem(ctx1);
-            plotRedArrow(ctx2);
-            frame++;
-            requestAnimationFrame(animate);
-        }
+    let deltaTime = 1;
+    if (lastTime) {
+        deltaTime = (currentTime - lastTime) / 1000.0;
     }
+    lastTime = currentTime;
+
+    plotSystem(ctx1);
+    plotRedArrow(ctx2);
+    frame++;
+    requestAnimationFrame(animate);
+}
+
 
     window.onload = function() {
         init();
