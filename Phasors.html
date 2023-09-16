@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phasor System</title>
+    <script>
+        const TWO_PI = 2 * Math.PI;
+        const totalFrames = 900;
+        let angles, speeds, circleOffsets, sumOfPhasors, xyCoords;
+        let numCircles = 4;
+        let phasorsPerCircle = 4;
+        let lastTime = null;
+        let collisionCount = 0;
+        let frame = 0;
+
+        function init() {
+            angles = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => Math.random() * TWO_PI));
+            speeds = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => Math.random() * 80.0 - 40.0));
+            circleOffsets = Array.from({length: numCircles}, (_, n) => [0.5 * Math.cos(TWO_PI * n / numCircles), 0.5 * Math.sin(TWO_PI * n / numCircles)]);
+            sumOfPhasors = new Array(totalFrames).fill({real: 0, imag: 0});
+            xyCoords = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => [0, 0]));
+        }
+
+        function updateCoordinates() {
+            for (let i = 0; i < numCircles; i++) {
+                for (let j = 0; j < phasorsPerCircle; j++) {
+                    xyCoords[i][j][0] = Math.cos(angles[i][j]) + circleOffsets[i][0];
+                    xyCoords[i][j][1] = Math.sin(angles[i][j]) + circleOffsets[i][1];
+                }
+            }
+        }
+        function update() {
+    let collisionsToResolve = new Set();
+    let collisionMatrix = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => false));
+    let phasorSizeSquared = 0.0025;
+
+    for (let i = 0; i < numCircles; i++) {
+        for (let j = 0; j < numCircles; j++) {
+            for (let k = 0; k < phasorsPerCircle; k++) {
+                for (let l = 0; l < phasorsPerCircle; l++) {
+                    if (i === j && k === l) continue;
+                    if (collisionMatrix[i][k] || collisionMatrix[j][l]) continue;
+
+                    let dx = xyCoords[i][k][0] - xyCoords[j][l][0];
+                    let dy = xyCoords[i][k][1] - xyCoords[j][l][1];
+                    let dSquared = dx * dx + dy * dy;
+
+                    if (dSquared < phasorSizeSquared) {
+                        collisionsToResolve.add([i, j, k, l, dx, dy]);
+                        collisionCount++;
+                        collisionMatrix[i][k] = true;
+                        collisionMatrix[j][l] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    for (const [i, j, k, l, dx, dy] of collisionsToResolve) {
+        // Calculate angular momentum before collision
+        let angularMomentum1 = speeds[i][k];
+        let angularMomentum2 = speeds[j][l];
+
+        // Swap angular momenta
+        let temp = angularMomentum1;
+        angularMomentum1 = angularMomentum2;
+        angularMomentum2 = temp;
+
+        // Update speeds based on new angular momenta
+        speeds[i][k] = angularMomentum1;
+        speeds[j][l] = angularMomentum2;
+    }
+
+    // Use a fixed time step for physics calculations
+    let fixedTimeStep = 0.001;
+    for (let i = 0; i < numCircles; i++) {
+        for (let j = 0; j < phasorsPerCircle; j++) {
+            angles[i][j] += fixedTimeStep * speeds[i][j];
+            angles[i][j] %= TWO_PI;
+        }
+    }
+
+    updateCoordinates();
+
+    let sum = {real: 0, imag: 0};
+    for (let i = 0; i < numCircles; i++) {
+        for (let j = 0; j < phasorsPerCircle; j++) {
+            sum.real += xyCoords[i][j][0];
+            sum.imag += xyCoords[i][j][1];
+        }
+    }
+    sumOfPhasors[frame] = sum;
+}
+
+
+
+    function plotSystem(ctx) {
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.scale(100, -100);
+        update(); // Removed the dummy deltaTime
+
+        for (let i = 0; i < numCircles; i++) {
+            let [offsetX, offsetY] = circleOffsets[i];
+            ctx.beginPath();
+            ctx.arc(offsetX, offsetY, 1, 0, TWO_PI);
+            ctx.strokeStyle = 'grey';
+            ctx.lineWidth = 0.01;
+            ctx.setLineDash([]);
+            ctx.stroke();
+
+            for (let j = 0; j < phasorsPerCircle; j++) {
+                let [x, y] = xyCoords[i][j];
+                ctx.beginPath();
+                ctx.arc(x, y, 0.05, 0, TWO_PI);
+                ctx.fillStyle = `hsl(${(i * phasorsPerCircle + j) * 360 / (numCircles * phasorsPerCircle)}, 100%, 50%)`;
+                ctx.fill();
+            }
+        }
+        ctx.restore();
+
+        ctx.fillStyle = 'black';
+        ctx.font = '12px Arial';
+        ctx.fillText(`Collisions: ${collisionCount}`, 300, 380);
+        let sum = sumOfPhasors[frame];
+        ctx.fillText(`Sum Coords: (${sum.real.toFixed(2)}, ${sum.imag.toFixed(2)})`, 300, 395);
+    }
+
+    function plotRedArrow(ctx) {
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.scale(20, -20);
+
+        for (let i = 0; i <= frame; i++) {
+            let phasorSum = sumOfPhasors[i];
+            let sumAngle = Math.atan2(phasorSum.imag, phasorSum.real);
+            let sumMagnitude = Math.sqrt(phasorSum.real * phasorSum.real + phasorSum.imag * phasorSum.imag);
+
+            ctx.beginPath();
+            ctx.arc(sumMagnitude * Math.cos(sumAngle), sumMagnitude * Math.sin(sumAngle), 0.04, 0, TWO_PI);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+        }
+
+        ctx.restore();
+    }
+
+    function animate(currentTime) {
+        const canvas1 = document.getElementById('canvas1');
+        const ctx1 = canvas1.getContext('2d');
+        const canvas2 = document.getElementById('canvas2');
+        const ctx2 = canvas2.getContext('2d');
+
+        let deltaTime = 1;
+        if (lastTime) {
+            deltaTime = (currentTime - lastTime) / 1000.0;
+        }
+        lastTime = currentTime;
+
+        if (frame < totalFrames) {
+            plotSystem(ctx1);
+            plotRedArrow(ctx2);
+            frame++;
+            requestAnimationFrame(animate);
+        }
+    }
+
+    window.onload = function() {
+        init();
+        requestAnimationFrame(animate);
+    };
+</script>
+</head>
+<body>
+<canvas id="canvas1" width="400" height="400"></canvas>
+<canvas id="canvas2" width="400" height="400"></canvas>
+</body>
+</html>
