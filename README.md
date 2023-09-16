@@ -40,6 +40,3 @@ Even with the world's fastest supercomputer, cracking this system would take on 
 
 
 
-To-Do list:
--Test for complexity
--Consider incorporating # of collisions as some sort of metric
