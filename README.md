@@ -3,11 +3,12 @@ Attempt at Quantum-Proof Encryption utilizing Chaos systems
 
 Utilizing a unique phasor system to create "signitures" (sum of phasors at any given T, right side) that can be easily verified given private-key starting conditions (phasors, left side), which can collide "cross-fire" stlye. Can perfectly re-run in microseconds, would take many universes to brute force. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
 
+Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
 
-<img width="822" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/a9097e10-4c4f-4fbe-a7e6-5a23c4c1fad0">
+HTML/Java
 
-High level Complexity:
+<img width="822" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/a9097e10-4c4f-4fbe-a7e6-5a23c4c1fad0">
 
 # Complexity Estimation of Brute-Forcing a Private Key
 
