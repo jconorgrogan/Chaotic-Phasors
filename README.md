@@ -1,6 +1,6 @@
 # Chaotic-Phasors
 
-Utilizing a unique phasor system to create "signitures" (sum of phasors at any given T, right side) that can be easily verified given private-key starting conditions (phasors, left side), which can collide "cross-fire" stlye. Can perfectly re-run in microseconds, would take many universes to brute force. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
+Utilizing a unique phasor system to create "signitures" (sum of phasors at any given T, right side, potentially sampled versus continuous) as a public key.  These public keys can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location), which can collide "cross-fire" stlye across overlapping circles. Can perfectly re-run in microseconds, but would take many universes to brute force. 
 
 Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
@@ -13,7 +13,7 @@ HTML/Java
 
 ## Example (from code- could also trivially increase complexity)
 
-1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors.
+1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
 2. **Precision**: Each phasor has a position and an angle, both to 16 decimal places.
 3. **Collision Events**: Expected number of collisions is 10,000 in a given run.
 
