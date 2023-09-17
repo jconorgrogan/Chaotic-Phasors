@@ -13,14 +13,14 @@ In these images, phasors race along the edge of these circles, preserving angula
 
 # Complexity Estimation of Brute-Forcing a Private Key.
 
-Estimatins from above images and code; could also trivially increase complexity
+Estimations from above images and code; could also trivially increase complexity
 
+Assumptions:
 1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
 2. **Precision**: Each phasor has a position and an angle, both to 16 decimal places.
 3. **Collision Events**: Expected number of collisions is 10,000 in a given run.
 
-## Complexity Estimation
-
+Logic:
 1. **Position & Speed**: For each of the 40 phasors, there are \(2 \times 10^{16}\) possible starting positions and \(2 \times 10^{16}\) possible speeds (angular momenta) due to 16 decimal places of precision. This results in \((2 \times 10^{16})^2\) states for a single phasor.
 2. **All Phasors**: For all 40 phasors, the total possible states become \((2 \times 10^{16})^{2 \times 40}\).
 3. **Collision Events**: For each collision event, it could occur between any two of the 40 phasors. There are \({{40}\choose{2}} = 780\) combinations of 2 phasors. For 10,000 collision events, this becomes \(780^{10,000}\).
