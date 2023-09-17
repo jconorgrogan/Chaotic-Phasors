@@ -2,10 +2,10 @@
 
 Utilizing a chaotic geometric system to create a unique signiture (sum of phasors at a randomly sampled set of T, right side) as a public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers), which can collide "cross-fire" stlye across overlapping circles. Can perfectly re-run in microseconds, but would take many universes to brute force. 
 
-Python App
+Image from run on Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
 
-HTML/Java
+Image from run on HTML/Java
 
 <img width="822" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/a9097e10-4c4f-4fbe-a7e6-5a23c4c1fad0">
 In these images, phasors race along the edge of these circles, preserving angular momentum. They can collide elastically, and also transfer their momentum to phasors on different circles. 
