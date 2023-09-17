@@ -8,6 +8,7 @@ Image from run on Python App
 Image from run on HTML/Java
 
 <img width="822" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/a9097e10-4c4f-4fbe-a7e6-5a23c4c1fad0">
+
 In these images, phasors race along the edge of these circles, preserving angular momentum. They can collide elastically, and also transfer their momentum to phasors on different circles. 
 
 # Complexity Estimation of Brute-Forcing a Private Key.
