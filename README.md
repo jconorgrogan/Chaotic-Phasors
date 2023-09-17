@@ -1,6 +1,6 @@
 # Chaotic-Phasors
 
-Utilizing a chaotic geometric system to create a unique signiture (sum of phasors at a randomly sampled set of T, right side) as a public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers), which can collide "cross-fire" stlye across overlapping circles. Can perfectly re-run in microseconds, but would take many universes to brute force. Potentially Quantum-resistant? 
+Utilizing a chaotic geometric system to create a unique signiture (sum of phasors at a randomly sampled set of T**, right side.) as a public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers), which can collide "cross-fire" stlye across overlapping circles. Can perfectly re-run in microseconds, but would take many universes to brute force. Potentially Quantum-resistant? 
 
 Image from run on Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
@@ -38,4 +38,4 @@ For simplification, consider just \(780^{10,000}\), which is already approximate
 
 Even with the world's fastest supercomputer, cracking this system would take on the order of \(10^{5984}\) seconds. For context, the estimated age of the universe is about \(4.3 \times 10^{17}\) seconds.  
 
-
+**Note: "Signiture" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
