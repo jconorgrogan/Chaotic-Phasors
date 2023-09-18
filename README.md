@@ -14,7 +14,7 @@ Image from run on HTML/Java
 
 # Complexity Estimation of Brute-Forcing a Private Key.
 
-Estimations from above images and code; TLDR, state space is  ![4^40 x 10^1920 x 780^{10,000}](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D%20%5Ctimes%20780%5E%7B10%2C000%7D)
+Estimations from above images and code; can be trivially ratched up in complexity via increasing values or adding in additional points of complexity such as additional physics
 
 ## Assumptions
 
