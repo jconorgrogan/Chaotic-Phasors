@@ -1,9 +1,11 @@
 # Chaotic-Phasors
 
-This project is a simulation of a system of phasors (rotating vectors) organized in multiple circles. Each circle contains a set number of phasors with their own initial angles and angular speeds. The phasors can collide both within their own circle and with phasors from other circles "cross-fire" style.  Can perfectly re-run in microseconds (any starting position will produce same finishing position and interim conditions).
+**Overview**
+This project is a simulation of a system of phasors (rotating vectors) organized in multiple circles and attempt to harness a deterministic chaotic system to create a unique encryption system. In this project, each circle starts with a set number of phasors with their own initial angles and angular speeds. The phasors can collide both within their own circle and with phasors from other circles "cross-fire" style.  Can perfectly re-run in microseconds (any starting position will produce same finishing position and interim conditions).
 
 Simulation output (sum of phasors at a randomly sampled set of T**; expect to make the output non-continuous, or map elements such as the collision # to state of each phasor) is the public key.  These public keys (illustrative example of output below) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers). An (extremely low confidence)upper-bound estimate is the time required to crack the system is on the order of ![e^{66760.5}](https://latex.codecogs.com/gif.latex?e%5E%7B66760.5%7D) times the estimated age of the universe (![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds) but this needs peer review.
 
+**Example Output**
 Example Gif of some of the first few frames from HTML app 
 ![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b42b94fe-d311-4638-8e09-77bf7ff0b66e)
 
@@ -14,6 +16,9 @@ Original run. Finalize node position on left, Output ("Public Key") in middle, s
 
 Run 2, with a 1 bit change to angular speed on the first phasor, all else the same
 <img width="1456" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b7275bee-557b-4724-8b04-33278684b836">
+
+
+**Example Output**
 
 # Encryption Method #
 
