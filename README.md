@@ -16,39 +16,43 @@ Image from run on HTML/Java
 
 Estimations from above images and code; TLDR, state space is  ![4^40 x 10^1920 x 780^{10,000}](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D%20%5Ctimes%20780%5E%7B10%2C000%7D)
 
-### Assumptions
+## Assumptions
 
-1. **4 Circles:** Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements for added complexity.
-2. **Precision:** Each phasor has a position and an angle, both with up to 16 decimal places of precision.
-3. **Collision Events:** Expected number of collisions is 10,000 in a given run.
-4. **Friction:** The friction introduced during a collision can take up to \(10^{16}\) different values.
+1. **4 Circles, 10 Phasors Each**: The system consists of 4 circles, each containing 10 phasors, totaling 40 phasors.
+2. **Random Initialization**: Angles are initialized randomly between \(0\) and \(2\pi\), and speeds are initialized randomly between \(-40\) and \(40\).
+3. **Collision Mechanics**: Collisions are determined by a set size, and upon collision, phasors swap their angular momentum.
+4. **Fixed Time Step**: A fixed time step of \(0.001\) is used for updating the phasors.
 
-### Logic
+## Logic for Complexity Estimation
 
-#### Position, Speed, and Friction
+### Angles and Speeds
 
-- For a single phasor, the possible states due to position and speed, and friction would be: 
-  ![4x10^48](https://latex.codecogs.com/gif.latex?4%20%5Ctimes%2010%5E%7B48%7D)
+- For one phasor, the complexity due to angles and speeds is calculated as:
+  \[ \text{Single Phasor Complexity} = 2\pi \times 80 = 160\pi \]
 
-#### All Phasors
+- For all 40 phasors, the total complexity becomes:
+  \[ \text{Total Phasor Complexity} = (160\pi)^{40} \]
 
-- For all 40 phasors, the total possible states become: 
-  ![4^40 x 10^1920](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D)
+### Collision Events
 
-#### Collision Events
+- The number of distinct collision pairs is \( \binom{40}{2} = 780 \).
+- Assuming a set number of collisions (10,000), the complexity due to collision events is:
+  \[ \text{Total Collision Complexity} = 780^{10,000} \]
 
-- For each collision event, it could occur between any two of the 40 phasors. The total number of combinations of 2 phasors is \({{40}\choose{2}} = 780\). For 10,000 collision events, the number of possible combinations becomes: 
-  ![780^{10,000}](https://latex.codecogs.com/gif.latex?780%5E%7B10%2C000%7D)
+## Total Complexity
 
-#### Total States
+- The total complexity of the system is given by:
+  \[ \text{Total Complexity} = \text{Total Phasor Complexity} \times \text{Total Collision Complexity} \]
 
-- Combining the states due to phasors and collision events: 
-  ![4^40 x 10^1920 x 780^{10,000}](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D%20%5Ctimes%20780%5E%7B10%2C000%7D)
+- Logarithmically, this is expressed as:
+  \[ \log(\text{Total Complexity}) = 40 \log(160\pi) + 10,000 \log(780) \]
 
-### Brute-Force Calculation
+## Time to Crack
 
-- Using the computational power of the world's fastest supercomputer, Fugaku, which operates at \(442.01 \times 10^{15}\) FLOP/s, the time required to crack the system would be: 
-  ![10^{7926}](https://latex.codecogs.com/gif.latex?10%5E%7B7926%7D) seconds.
+- Using Fugaku's computational power of \(442.01 \times 10^{15}\) FLOP/s, the logarithmic time required to crack the system is:
+  \[ \log(\text{Time to Crack}) = \log(\text{Total Complexity}) - \log(\text{Fugaku Speed}) \]
+
+- The time required is so large that it causes numerical overflow, indicating that it's astronomically high.
 
 For context, the estimated age of the universe is about \(4.3 \times 10^{17}\) seconds.  
 
