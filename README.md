@@ -16,7 +16,7 @@ Image from run on HTML/Java
 
 - **4 Circles, 10 Phasors Each**: The system consists of 4 circles, each containing 10 phasors, totaling 40 phasors.
 - **Random Initialization**: Angles are initialized randomly between (0) and (2\pi), and speeds are initialized randomly between (-40) and (40).
-- **Collision Mechanics**: Collisions are determined by a set size, and upon collision, phasors swap their angular momentum.
+- **Collision Mechanics**: Collisions are determined by a set size, and upon collision, phasors swap their angular momentum. There is additional "friction" added by the system during cross-circle collisions
 - **Fixed Time Step**: A fixed time step of (0.001) is used for updating the phasors.
 
 ## Logic for Complexity Estimation
