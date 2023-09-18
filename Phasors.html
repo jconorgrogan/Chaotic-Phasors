@@ -10,6 +10,7 @@
         let phasorsPerCircle = 10;
         let lastTime = null;
         let collisionCount = 0;
+        let resolvedCollisions = new Set();  
         let frame = 0;
 
         function init() {
@@ -32,7 +33,8 @@
     let collisionsToResolve = new Set();
     let collisionMatrix = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => false));
     let phasorSizeSquared = 0.0025;
-
+    
+    // First, detect all collisions and populate collisionsToResolve
     for (let i = 0; i < numCircles; i++) {
         for (let j = 0; j < numCircles; j++) {
             for (let k = 0; k < phasorsPerCircle; k++) {
@@ -46,7 +48,6 @@
 
                     if (dSquared < phasorSizeSquared) {
                         collisionsToResolve.add([i, j, k, l, dx, dy]);
-                        collisionCount++;
                         collisionMatrix[i][k] = true;
                         collisionMatrix[j][l] = true;
                     }
@@ -55,20 +56,44 @@
         }
     }
 
+    // Second, loop through the collisionsToResolve to update collisionCount
     for (const [i, j, k, l, dx, dy] of collisionsToResolve) {
-        // Calculate angular momentum before collision
-        let angularMomentum1 = speeds[i][k];
-        let angularMomentum2 = speeds[j][l];
-
-        // Swap angular momenta
-        let temp = angularMomentum1;
-        angularMomentum1 = angularMomentum2;
-        angularMomentum2 = temp;
-
-        // Update speeds based on new angular momenta
-        speeds[i][k] = angularMomentum1;
-        speeds[j][l] = angularMomentum2;
+        let collisionId = `${i}-${j}-${k}-${l}`;
+        
+        if (!resolvedCollisions.has(collisionId)) {
+            collisionCount++;
+            resolvedCollisions.add(collisionId);
+        }
     }
+    
+
+    for (const [i, j, k, l, dx, dy] of collisionsToResolve) {
+    // Calculate angular momentum before collision
+    let angularMomentum1 = speeds[i][k];
+    let angularMomentum2 = speeds[j][l];
+
+    // Swap angular momenta
+    let temp = angularMomentum1;
+    angularMomentum1 = angularMomentum2;
+    angularMomentum2 = temp;
+
+    // Only apply friction for cross-circle collisions
+    if (i !== j) {
+        // Introduce a dynamic friction factor based on the speeds themselves
+        const frictionFactor1 = Math.log(Math.abs(angularMomentum1) + 1) / 1000;
+        const frictionFactor2 = Math.log(Math.abs(angularMomentum2) + 1) / 1000;
+
+
+        angularMomentum1 *= (1 - frictionFactor1);
+        angularMomentum2 *= (1 - frictionFactor2);
+    }
+
+    // Update speeds based on new angular momenta
+    speeds[i][k] = angularMomentum1;
+    speeds[j][l] = angularMomentum2;
+}
+
+
 
     // Use a fixed time step for physics calculations
     let fixedTimeStep = 0.001;
@@ -118,13 +143,13 @@
             }
         }
         ctx.restore();
-
-        ctx.fillStyle = 'black';
-        ctx.font = '12px Arial';
-        ctx.fillText(`Collisions: ${collisionCount}`, 300, 380);
-        let sum = sumOfPhasors[frame];
-        ctx.fillText(`Sum Coords: (${sum.real.toFixed(2)}, ${sum.imag.toFixed(2)})`, 300, 395);
-    }
+            
+            ctx.fillStyle = 'black';
+            ctx.font = '12px Arial';
+            ctx.fillText(`Collisions: ${collisionCount}`, 10, 15);  // Moved to top left corner
+            let sum = sumOfPhasors[frame];
+            ctx.fillText(`Sum Coords: (${sum.real.toFixed(2)}, ${sum.imag.toFixed(2)})`, 10, 30);  // Moved to top left corner below collisions
+        }
 
     function plotRedArrow(ctx) {
         ctx.clearRect(0, 0, 400, 400);
