@@ -246,10 +246,16 @@ function plotInitialConditions(ctx) {
     const canvas2 = document.getElementById('canvas2');
     const ctx2 = canvas2.getContext('2d');
 
+    const maxCollisions = parseInt(document.getElementById('maxCollisions').value);
+
     if (isSimulationRunning) {
-        plotSystem(ctx1);
-        plotRedArrow(ctx2);
-        frame++;
+        if (collisionCount < maxCollisions) {
+            plotSystem(ctx1);
+            plotRedArrow(ctx2);
+            frame++;
+        } else {
+            isSimulationRunning = false;  // Stop the simulation
+        }
     }
 
     let deltaTime = 1;
@@ -261,15 +267,18 @@ function plotInitialConditions(ctx) {
     requestAnimationFrame(animate);
 }
 
+
     function startSimulation() {
         isSimulationRunning = true;
     }
 
     function resetSimulation() {
-        init();
-        isSimulationRunning = false;
-        frame = 0;
-    }
+    init();
+    isSimulationRunning = false;
+    frame = 0;
+    collisionCount = 0; // Resetting collision counter
+    resolvedCollisions.clear(); // Clearing resolved collisions
+}
     window.onload = function() {
     init();
     updateCoordinates();
@@ -306,6 +315,8 @@ function plotInitialConditions(ctx) {
             <!-- Inputs will be populated here -->
         </div>
         <button id="applySettings" style="font-size: 18px; padding: 10px;">Apply Settings</button>
+        <label for="maxCollisions">Max Collisions: </label>
+        <input type="number" id="maxCollisions" value="500">
     </div>
     <button id="startButton" style="font-size: 18px; padding: 10px;">Start</button>
     <button id="resetButton" style="font-size: 18px; padding: 10px;">Reset</button>
