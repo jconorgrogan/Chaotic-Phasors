@@ -8,8 +8,13 @@ This method can be used to create a quantum-resistant means of encryption. Simul
 Example Gif of some of the first few frames from HTML app 
 ![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b42b94fe-d311-4638-8e09-77bf7ff0b66e)
 
-Screenshot from Python implementation
-<img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
+A 1 bit change in private key leads to a completely different output
+Original run. Finalize node position on left, Output ("Public Key") in middle, starting conditions (Private Key)on right
+<img width="1456" alt="Pasted Graphic 9" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/48c93649-6bb1-42bf-9114-ff5a38079de2">
+
+Run 2, with a 1 digit addition to angular speed and all else the same
+<img width="1456" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/8a77dafb-a4ec-4533-bc58-b77dec768d36">
+
 
 # Upper Bound Complexity Estimation of Brute-Forcing a Private Key.
 
