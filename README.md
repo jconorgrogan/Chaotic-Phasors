@@ -8,7 +8,7 @@ This method can be used to create a quantum-resistant means of encryption. Simul
 Example Gif of some of the first few frames from HTML app 
 ![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b42b94fe-d311-4638-8e09-77bf7ff0b66e)
 
-A 1 bit change (0.000001 addition to velocity in one node) leads to a significant change
+"Flapping of a butterflys wings": A 1 bit change (0.000001 addition to velocity in one node) leads to a significant change in the output
 
 Original run. Finalize node position on left, Output ("Public Key") in middle, starting conditions(Private Key) on bottom, visualized on top right
 <img width="1456" alt="Pasted Graphic 9" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/48c93649-6bb1-42bf-9114-ff5a38079de2">
