@@ -50,8 +50,6 @@ Estimations from above images and code; TLDR, state space is  ![4^40 x 10^1920 x
 - Using the computational power of the world's fastest supercomputer, Fugaku, which operates at \(442.01 \times 10^{15}\) FLOP/s, the time required to crack the system would be: 
   ![10^{7926}](https://latex.codecogs.com/gif.latex?10%5E%7B7926%7D) seconds.
 
-Even with the world's fastest supercomputer, cracking this system would take on the order of \(10^{7926}\) seconds
-
 For context, the estimated age of the universe is about \(4.3 \times 10^{17}\) seconds.  
 
 **Note: "Signiture" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
