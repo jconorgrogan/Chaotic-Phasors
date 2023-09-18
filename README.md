@@ -7,10 +7,10 @@ This project is a simulation of a system of phasors (rotating vectors) organized
 Simulation output (sum of phasors at a randomly sampled set of T**; expect to make the output non-continuous, or map elements such as the collision # to state of each phasor) is the public key.  These public keys (illustrative example of output below) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers). An (extremely low confidence)upper-bound estimate is the time required to crack the system is on the order of ![e^{66760.5}](https://latex.codecogs.com/gif.latex?e%5E%7B66760.5%7D) times the estimated age of the universe (![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds) but this needs peer review.
 
 **Example Output**
-Example Gif of some of the first few frames from HTML app 
+Gif of some of the first few frames from HTML app (collision counter since fixed)
 ![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b42b94fe-d311-4638-8e09-77bf7ff0b66e)
 
-"Flapping of a butterflys wings": A 1 bit change (0.000001 addition to velocity in one node) leads to a significant change in the output
+Butterfly Effect: A 1 bit change (0.000001 addition to velocity in one node) leads to a significant change in the output
 
 Original run. Finalize node position on left, Output ("Public Key") in middle, starting conditions(Private Key) on bottom, visualized on top right
 <img width="1456" alt="Pasted Graphic 9" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/48c93649-6bb1-42bf-9114-ff5a38079de2">
