@@ -7,6 +7,8 @@ This method can be used to create a quantum-resistant means of encryption. Simul
 
 Example Gif of some of the first few frames from HTML app 
 ![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/b42b94fe-d311-4638-8e09-77bf7ff0b66e)
+![Phasors_segment](https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/0467d5c9-3375-453c-aa15-073ac39fc486)
+
 
 Screenshot from Python implementation
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
