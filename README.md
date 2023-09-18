@@ -16,27 +16,42 @@ Image from run on HTML/Java
 
 Estimations from above images and code; could also trivially increase complexity via increasing circles, phasors, or adjusting physics.
 
-Assumptions:
-1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
-2. **Precision**: Each phasor has a position and an angle, both to 16 decimal places.
-3. **Collision Events**: Expected number of collisions is 10,000 in a given run.
+### Assumptions
 
-Logic:
-1. **Position & Speed**: For each of the 40 phasors, there are \(2 \times 10^{16}\) possible starting positions and \(2 \times 10^{16}\) possible speeds (angular momenta) due to 16 decimal places of precision. This results in \((2 \times 10^{16})^2\) states for a single phasor.
-2. **All Phasors**: For all 40 phasors, the total possible states become \((2 \times 10^{16})^{2 \times 40}\).
-3. **Collision Events**: For each collision event, it could occur between any two of the 40 phasors. There are \({{40}\choose{2}} = 780\) combinations of 2 phasors. For 10,000 collision events, this becomes \(780^{10,000}\).
-4. **Total States**: Combine the states due to phasors and collision events: \((2 \times 10^{16})^{2 \times 40} \times 780^{10,000}\).
+1. **4 Circles:** Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements for added complexity.
+2. **Precision:** Each phasor has a position and an angle, both with up to 16 decimal places of precision.
+3. **Collision Events:** Expected number of collisions is 10,000 in a given run.
+4. **Friction:** The friction introduced during a collision can take up to \(10^{16}\) different values.
 
-## Brute-Force Calculation
+### Logic
 
-Using the computational power of the world's fastest supercomputer, Fugaku, which operates at \(442.01 \times 10^{15}\) FLOP/s:
+#### Position, Speed, and Friction
 
-Time = \[\frac{(2 \times 10^{16})^{2 \times 40} \times 780^{10,000}}{442.01 \times 10^{15}}\] seconds
+- For a single phasor, the possible states due to position and speed, and friction would be: 
+  ![4x10^48](https://latex.codecogs.com/gif.latex?4%20%5Ctimes%2010%5E%7B48%7D)
 
-For simplification, consider just \(780^{10,000}\), which is already approximately \(10^{6000}\):
+#### All Phasors
 
-\[\frac{10^{6000}}{10^{16}} = 10^{5984}\] seconds
+- For all 40 phasors, the total possible states become: 
+  ![4^40 x 10^1920](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D)
 
-Even with the world's fastest supercomputer, cracking this system would take on the order of \(10^{5984}\) seconds. For context, the estimated age of the universe is about \(4.3 \times 10^{17}\) seconds.  
+#### Collision Events
+
+- For each collision event, it could occur between any two of the 40 phasors. The total number of combinations of 2 phasors is \({{40}\choose{2}} = 780\). For 10,000 collision events, the number of possible combinations becomes: 
+  ![780^{10,000}](https://latex.codecogs.com/gif.latex?780%5E%7B10%2C000%7D)
+
+#### Total States
+
+- Combining the states due to phasors and collision events: 
+  ![4^40 x 10^1920 x 780^{10,000}](https://latex.codecogs.com/gif.latex?4%5E%7B40%7D%20%5Ctimes%2010%5E%7B1920%7D%20%5Ctimes%20780%5E%7B10%2C000%7D)
+
+### Brute-Force Calculation
+
+- Using the computational power of the world's fastest supercomputer, Fugaku, which operates at \(442.01 \times 10^{15}\) FLOP/s, the time required to crack the system would be: 
+  ![10^{7926}](https://latex.codecogs.com/gif.latex?10%5E%7B7926%7D) seconds.
+
+Even with the world's fastest supercomputer, cracking this system would take on the order of \(10^{7926}\) seconds
+
+For context, the estimated age of the universe is about \(4.3 \times 10^{17}\) seconds.  
 
 **Note: "Signiture" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
