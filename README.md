@@ -2,7 +2,7 @@
 
 This project is a simulation of a system of phasors (rotating vectors) organized in multiple circles. Each circle contains a set number of phasors with their own initial angles and angular speeds. The phasors can collide both within their own circle and with phasors from other circles "cross-fire" style.  Can perfectly re-run in microseconds (any starting position will produce same finishing position and interim conditions), but would take many universes to brute force/reverse without the starting key. 
 
-This method can be used to create a quantum-resistant means of encryption. Simulation output (sum of phasors at a randomly sampled set of T**) is  public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers). 
+This method can be used to create a quantum-resistant means of encryption. Simulation output (sum of phasors at a randomly sampled set of T**) is  public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers). An upper-bound estimate is the time required to crack the system is on the order of ![e^{66760.5}](https://latex.codecogs.com/gif.latex?e%5E%7B66760.5%7D) times the estimated age of the universe (![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds).
 
 Image from run on Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
@@ -52,7 +52,5 @@ The logarithmic time required to crack the system, when expressed in units of th
 ![\log(\text{Time to Crack}) \approx 66760.5](https://latex.codecogs.com/gif.latex?%5Clog%28%5Ctext%7BTime%20to%20Crack%7D%29%20%5Capprox%2066760.5).
 
 This means that the time required to crack the system is on the order of ![e^{66760.5}](https://latex.codecogs.com/gif.latex?e%5E%7B66760.5%7D) times the estimated age of the universe (![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds).
-
-For context, the estimated age of the universe is about ![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds.
 
 **Note: "Signiture" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
