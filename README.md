@@ -12,7 +12,7 @@ A 1 bit change in private key leads to a completely different output
 Original run. Finalize node position on left, Output ("Public Key") in middle, starting conditions (Private Key)on right
 <img width="1456" alt="Pasted Graphic 9" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/48c93649-6bb1-42bf-9114-ff5a38079de2">
 
-Run 2, with a 1 digit addition to angular speed and all else the same
+Run 2, with a 1 digit change to angular speed on one phasor, all else the same
 <img width="1456" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors-Encryption/assets/130090573/8a77dafb-a4ec-4533-bc58-b77dec768d36">
 
 
