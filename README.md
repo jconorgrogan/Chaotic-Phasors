@@ -1,6 +1,8 @@
 # Chaotic-Phasors
 
-Utilizing a chaotic geometric system to create a unique signiture (sum of phasors at a randomly sampled set of T**) as a public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers), which can collide "cross-fire" stlye across overlapping circles. Can perfectly re-run in microseconds, but would take many universes to brute force. Potentially Quantum-resistant? 
+This project is a simulation of a system of phasors (rotating vectors) organized in multiple circles. Each circle contains a set number of phasors with their own initial angles and angular speeds. The phasors can collide both within their own circle and with phasors from other circles "cross-fire" style.  Can perfectly re-run in microseconds, but would take many universes to brute force/reverse without the starting key. 
+
+This method can be used to create a quantum-resistant means of encryption. Simulation output (sum of phasors at a randomly sampled set of T**) is  public key.  These public keys (right side on below image) can be easily verified in a deterministic way given private-key starting conditions (phasors, including momentum and location, and other data such as collisions numbers). 
 
 Image from run on Python App
 <img width="1134" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/e413c786-fc01-476c-8538-854be16284c4">
@@ -9,11 +11,10 @@ Image from run on HTML/Java
 
 <img width="822" alt="image" src="https://github.com/jconorgrogan/Chaotic-Phasors/assets/130090573/a9097e10-4c4f-4fbe-a7e6-5a23c4c1fad0">
 
-In these images, phasors race along the edge of these circles, preserving angular momentum. They can collide elastically, and also transfer their momentum to phasors on different circles. 
 
 # Complexity Estimation of Brute-Forcing a Private Key.
 
-Estimations from above images and code; could also trivially increase complexity
+Estimations from above images and code; could also trivially increase complexity via increasing circles, phasors, or adjusting physics.
 
 Assumptions:
 1. **4 Circles**: Each with 10 phasors (nodes), totaling 40 phasors. Can optionally scale up phasors, circles, and other elements to make it even more mind-boggling complicated
