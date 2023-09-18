@@ -117,4 +117,4 @@ The logarithmic time required to crack the system, when expressed in units of th
 
 This means that the time required to crack the system is on the order of ![e^{66760.5}](https://latex.codecogs.com/gif.latex?e%5E%7B66760.5%7D) times the estimated age of the universe (![4.3 \times 10^{17}](https://latex.codecogs.com/gif.latex?4.3%20%5Ctimes%2010%5E%7B17%7D) seconds).
 
-**Note: "Signiture" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
+**Note: "Public Key" can not be continous data as it will open up reversal-type attacks. Propose mixing disperate sections of T while also mapping integers,
