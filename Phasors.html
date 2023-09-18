@@ -12,6 +12,7 @@
         let collisionCount = 0;
         let resolvedCollisions = new Set();  
         let frame = 0;
+        let isSimulationRunning = false;
 
         function init() {
             angles = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => Math.random() * TWO_PI));
@@ -19,6 +20,57 @@
             circleOffsets = Array.from({length: numCircles}, (_, n) => [0.5 * Math.cos(TWO_PI * n / numCircles), 0.5 * Math.sin(TWO_PI * n / numCircles)]);
             sumOfPhasors = new Array(totalFrames).fill({real: 0, imag: 0});
             xyCoords = Array.from({length: numCircles}, () => Array.from({length: phasorsPerCircle}, () => [0, 0]));
+            isSimulationRunning = false;
+        }
+
+        function populateInputs() {
+    const circleInputs = document.getElementById("circleInputs");
+    circleInputs.innerHTML = "";
+    for (let i = 0; i < numCircles; i++) {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.display = 'flex';
+        rowDiv.style.flexWrap = 'wrap';
+        for (let j = 0; j < phasorsPerCircle; j++) {
+            const inputDiv = document.createElement("div");
+            inputDiv.style.flex = '1';
+            inputDiv.innerHTML = `C${i + 1}P${j + 1}: 
+                <input type="number" id="angle-${i}-${j}" placeholder="Angle">
+                <input type="number" id="speed-${i}-${j}" placeholder="Speed">`;
+            rowDiv.appendChild(inputDiv);
+        }
+        circleInputs.appendChild(rowDiv);
+    }
+}
+
+        
+        function populateFormWithRandomValues() {
+    for (let i = 0; i < numCircles; i++) {
+        for (let j = 0; j < phasorsPerCircle; j++) {
+            document.getElementById(`angle-${i}-${j}`).value = (angles[i][j] * 180 / Math.PI).toFixed(6);
+            document.getElementById(`speed-${i}-${j}`).value = speeds[i][j].toFixed(6);
+
+        }
+    }
+}
+
+
+        function applySettings() {
+            for (let i = 0; i < numCircles; i++) {
+                for (let j = 0; j < phasorsPerCircle; j++) {
+                    const angleInput = document.getElementById(`angle-${i}-${j}`);
+                    const speedInput = document.getElementById(`speed-${i}-${j}`);
+                    if (angleInput.value) {
+                        angles[i][j] = parseFloat(angleInput.value) * (Math.PI / 180);
+                    }
+                    if (speedInput.value) {
+                        speeds[i][j] = parseFloat(speedInput.value);
+                    }
+                }
+            }
+            updateCoordinates();
+            const canvas3 = document.getElementById('canvas3');
+            const ctx3 = canvas3.getContext('2d');
+            plotInitialConditions(ctx3);
         }
 
         function updateCoordinates() {
@@ -116,6 +168,23 @@
     sumOfPhasors[frame] = sum;
 }
 
+function plotInitialConditions(ctx) {
+    ctx.clearRect(0, 0, 400, 400);
+    ctx.save();
+    ctx.translate(200, 200);
+    ctx.scale(100, -100);
+
+    for (let i = 0; i < numCircles; i++) {
+        for (let j = 0; j < phasorsPerCircle; j++) {
+            let [x, y] = xyCoords[i][j];
+            ctx.beginPath();
+            ctx.arc(x, y, 0.05, 0, TWO_PI);
+            ctx.fillStyle = `hsl(${(i * phasorsPerCircle + j) * 360 / (numCircles * phasorsPerCircle)}, 100%, 50%)`;
+            ctx.fill();
+        }
+    }
+    ctx.restore();
+}
 
 
     function plotSystem(ctx) {
@@ -177,27 +246,68 @@
     const canvas2 = document.getElementById('canvas2');
     const ctx2 = canvas2.getContext('2d');
 
+    if (isSimulationRunning) {
+        plotSystem(ctx1);
+        plotRedArrow(ctx2);
+        frame++;
+    }
+
     let deltaTime = 1;
     if (lastTime) {
         deltaTime = (currentTime - lastTime) / 1000.0;
     }
     lastTime = currentTime;
 
-    plotSystem(ctx1);
-    plotRedArrow(ctx2);
-    frame++;
     requestAnimationFrame(animate);
 }
 
+    function startSimulation() {
+        isSimulationRunning = true;
+    }
 
-    window.onload = function() {
+    function resetSimulation() {
         init();
-        requestAnimationFrame(animate);
-    };
-</script>
+        isSimulationRunning = false;
+        frame = 0;
+    }
+    window.onload = function() {
+    init();
+    updateCoordinates();
+    populateInputs();  // Populate input fields
+    populateFormWithRandomValues();  // Populate form with initial random values
+    applySettings();  // Apply the settings
+
+    // Plot initial conditions on canvas3
+    const canvas3 = document.getElementById('canvas3');
+    const ctx3 = canvas3.getContext('2d');
+    plotInitialConditions(ctx3);
+
+    const startButton = document.getElementById('startButton');
+    startButton.addEventListener('click', startSimulation);
+
+    const resetButton = document.getElementById('resetButton');
+    resetButton.addEventListener('click', resetSimulation);
+
+    const applySettingsButton = document.getElementById("applySettings");
+    applySettingsButton.addEventListener('click', applySettings);
+
+    requestAnimationFrame(animate);
+};
+
+    </script>
 </head>
 <body>
-<canvas id="canvas1" width="400" height="400"></canvas>
-<canvas id="canvas2" width="400" height="400"></canvas>
+    <canvas id="canvas1" width="400" height="400"></canvas>
+    <canvas id="canvas2" width="400" height="400"></canvas>
+    <canvas id="canvas3" width="400" height="400"></canvas>
+    <div id="settings">
+        <h3>Initial Settings</h3>
+        <div id="circleInputs">
+            <!-- Inputs will be populated here -->
+        </div>
+        <button id="applySettings" style="font-size: 18px; padding: 10px;">Apply Settings</button>
+    </div>
+    <button id="startButton" style="font-size: 18px; padding: 10px;">Start</button>
+    <button id="resetButton" style="font-size: 18px; padding: 10px;">Reset</button>
 </body>
 </html>
