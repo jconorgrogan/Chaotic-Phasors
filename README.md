@@ -60,21 +60,6 @@ Given a graph \( G = (V, E) \), find a path that visits each vertex in \( V \) e
   
 2. **Preserving Problem Difficulty**: Establishing this rigorously would involve showing that any algorithm solving \( G \) can be adapted to solve for \( T \) in \( \mathcal{C} \), and vice versa, without a significant increase in computational resources.
 
-# Encryption Method #
-
-## Key Modification
-The initial few bits of data act as a modifier for the 'private key,' affecting how the phasor run is generated. This could be altering the speed, changing certain operations, or any other parameter that significantly affects the system's behavior.
-
-## Message Encoding
-The subsequent parts of the message are mapped onto features of this modified phasor run. For instance, the first bit could be encoded as the conditions at the first collision, the second bit as the conditions at the second collision, and so on.
-
-## Transmission
-The sender communicates this encoded message to the receiver.
-
-## Decryption and Reading
-The receiver applies the initial few bits of data to their synchronized private key, recreates the modified phasor run, and then decodes the message using the agreed-upon mapping.
-
-
 
 # Upper Bound Complexity Estimation of Brute-Forcing a Private Key.
 
